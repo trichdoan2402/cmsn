@@ -125,6 +125,23 @@
       <p id="modalCaption"></p>
     </dialog>
 
+    <dialog id="giftModal" class="gift-modal" aria-labelledby="giftTitle">
+      <button id="closeGift" class="gift-close" type="button" aria-label="Đóng hộp quà">×</button>
+      <h2 id="giftTitle">Một món quà nữa dành cho em 💝</h2>
+      <p id="giftInstruction">Chạm vào hộp quà để mở nhé!</p>
+      <button id="openGift" class="gift-box" type="button" aria-label="Mở hộp quà">
+        <span class="gift-lid"></span>
+        <span class="gift-body"></span>
+        <span class="gift-ribbon-vertical"></span>
+        <span class="gift-ribbon-horizontal"></span>
+        <span class="gift-bow gift-bow-left"></span>
+        <span class="gift-bow gift-bow-right"></span>
+      </button>
+      <div id="giftReveal" class="gift-reveal" hidden>
+        <img src="assets/photos/hinh7.jpg" alt="Bức ảnh bất ngờ dành cho em" />
+        <p>Một chiếc hôn thật to dành cho em! 😘</p>
+      </div>
+    </dialog>
     <audio id="birthdayMusic" loop preload="none">
       <source src="assets/birthday-music.mp3" type="audio/mpeg" />
     </audio>

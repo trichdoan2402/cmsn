@@ -10,12 +10,12 @@ const CONFIG = {
   PASSWORD: "3009",
   LOVER_NAME: "Mập địch",
   PHOTOS: [
-    { src: "assets/photos/hinh1.jpg", date: "KỶ NIỆM 01", },
-    { src: "assets/photos/hinh2.jpg", date: "KỶ NIỆM 02", },
-    { src: "assets/photos/hinh3.jpg", date: "KỶ NIỆM 03", },
-    { src: "assets/photos/hinh4.jpg", date: "KỶ NIỆM 04", },
-    { src: "assets/photos/hinh5.jpg", date: "KỶ NIỆM 05", },
-    { src: "assets/photos/hinh6.jpg", date: "KỶ NIỆM 06", },
+    { src: "assets/photos/hinh1.jpg", },
+    { src: "assets/photos/hinh2.jpg", },
+    { src: "assets/photos/hinh3.jpg", },
+    { src: "assets/photos/hinh4.jpg", },
+    { src: "assets/photos/hinh5.jpg", },
+    { src: "assets/photos/hinh6.jpg", },
   ],
 };
 
@@ -87,10 +87,10 @@ CONFIG.PHOTOS.forEach((photo, index) => {
   card.className = "photo-card reveal";
   card.tabIndex = 0;
   card.setAttribute("role", "button");
-  card.setAttribute("aria-label", `Xem ảnh: ${photo.caption ?? ""}`);
+  card.setAttribute("aria-label", `Xem ảnh ${index + 1}${photo.caption ? `: ${photo.caption}` : ""}`);
   card.innerHTML = `
     <img src="${photo.src}" alt="${photo.caption ?? ""}" loading="lazy">
-    <div class="photo-caption"><span>${photo.date}</span><h3>${photo.caption ?? ""}</h3></div>
+    ${photo.date || photo.caption ? `<div class="photo-caption">${photo.date ? `<span>${photo.date}</span>` : ""}${photo.caption ? `<h3>${photo.caption}</h3>` : ""}</div>` : ""}
   `;
   const img = card.querySelector("img");
   img.addEventListener("error", () => {
@@ -129,12 +129,41 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.14 });
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
+const giftModal = document.querySelector("#giftModal");
+const giftBox = document.querySelector("#openGift");
+const giftReveal = document.querySelector("#giftReveal");
+const giftInstruction = document.querySelector("#giftInstruction");
+const giftImage = giftReveal.querySelector("img");
+let giftRevealTimer;
+
 document.querySelector("#celebrateButton").addEventListener("click", () => {
+  clearTimeout(giftRevealTimer);
+  giftBox.classList.remove("opened");
+  giftBox.hidden = false;
+  giftReveal.hidden = true;
+  giftInstruction.hidden = false;
+  giftModal.showModal();
+  launchConfetti(220);
+});
+
+giftBox.addEventListener("click", () => {
+  giftBox.classList.add("opened");
   launchConfetti(420);
-  document.querySelector(".heart-pulse").animate(
-    [{ transform: "scale(1)" }, { transform: "scale(1.8)" }, { transform: "scale(1)" }],
-    { duration: 850, easing: "ease-out" }
-  );
+  giftRevealTimer = window.setTimeout(() => {
+    giftBox.hidden = true;
+    giftInstruction.hidden = true;
+    giftReveal.hidden = false;
+  }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650);
+});
+
+document.querySelector("#closeGift").addEventListener("click", () => giftModal.close());
+giftModal.addEventListener("close", () => clearTimeout(giftRevealTimer));
+giftModal.addEventListener("click", (event) => {
+  if (event.target === giftModal) giftModal.close();
+});
+giftImage.addEventListener("error", () => {
+  giftImage.hidden = true;
+  giftReveal.querySelector("p").textContent = "Ảnh bất ngờ đang được chuẩn bị 💝";
 });
 
 // Hiệu ứng pháo giấy nhẹ, không cần thư viện ngoài.
