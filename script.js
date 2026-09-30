@@ -7,15 +7,15 @@
    để bảo vệ dữ liệu riêng tư hoặc nhạy cảm.
 ================================================================ */
 const CONFIG = {
-  PASSWORD: "yeuem",
-  LOVER_NAME: "Tình yêu của anh!",
+  PASSWORD: "3009",
+  LOVER_NAME: "Mập địch",
   PHOTOS: [
-    { src: "assets/photos/anh-1.jpg", date: "KỶ NIỆM 01", caption: "Ngày mình bắt đầu câu chuyện" },
-    { src: "assets/photos/anh-2.jpg", date: "KỶ NIỆM 02", caption: "Một ngày thật nhiều tiếng cười" },
-    { src: "assets/photos/anh-3.jpg", date: "KỶ NIỆM 03", caption: "Khoảnh khắc anh luôn nhớ" },
-    { src: "assets/photos/anh-4.jpg", date: "KỶ NIỆM 04", caption: "Cùng nhau đi thật nhiều nơi" },
-    { src: "assets/photos/anh-5.jpg", date: "KỶ NIỆM 05", caption: "Bình yên là khi có em" },
-    { src: "assets/photos/anh-6.jpg", date: "KỶ NIỆM 06", caption: "Và thật nhiều ngày sau nữa" },
+    { src: "assets/photos/hinh1.jpg", date: "KỶ NIỆM 01", },
+    { src: "assets/photos/hinh2.jpg", date: "KỶ NIỆM 02", },
+    { src: "assets/photos/hinh3.jpg", date: "KỶ NIỆM 03", },
+    { src: "assets/photos/hinh4.jpg", date: "KỶ NIỆM 04", },
+    { src: "assets/photos/hinh5.jpg", date: "KỶ NIỆM 05", },
+    { src: "assets/photos/hinh6.jpg", date: "KỶ NIỆM 06", },
   ],
 };
 
@@ -87,10 +87,10 @@ CONFIG.PHOTOS.forEach((photo, index) => {
   card.className = "photo-card reveal";
   card.tabIndex = 0;
   card.setAttribute("role", "button");
-  card.setAttribute("aria-label", `Xem ảnh: ${photo.caption}`);
+  card.setAttribute("aria-label", `Xem ảnh: ${photo.caption ?? ""}`);
   card.innerHTML = `
-    <img src="${photo.src}" alt="${photo.caption}" loading="lazy">
-    <div class="photo-caption"><span>${photo.date}</span><h3>${photo.caption}</h3></div>
+    <img src="${photo.src}" alt="${photo.caption ?? ""}" loading="lazy">
+    <div class="photo-caption"><span>${photo.date}</span><h3>${photo.caption ?? ""}</h3></div>
   `;
   const img = card.querySelector("img");
   img.addEventListener("error", () => {
@@ -104,7 +104,7 @@ CONFIG.PHOTOS.forEach((photo, index) => {
   const openPhoto = () => {
     if (!card.querySelector("img")) return;
     modalImage.src = photo.src;
-    modalCaption.textContent = photo.caption;
+    modalCaption.textContent = photo.caption ?? "";
     photoModal.showModal();
   };
   card.addEventListener("click", openPhoto);
