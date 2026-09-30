@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#190925" />
+    <meta name="description" content="Một món quà sinh nhật nhỏ, được gói bằng thật nhiều yêu thương." />
+    <title>Món quà sinh nhật dành cho em 💝</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="locked">
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
+    <section class="lock-screen" id="lockScreen" aria-labelledby="lockTitle">
+      <div class="lock-orb orb-one"></div>
+      <div class="lock-orb orb-two"></div>
+      <div class="lock-card glass">
+        <div class="gift-icon" aria-hidden="true">🎁</div>
+        <p class="eyebrow">MỘT BÍ MẬT NHO NHỎ</p>
+        <h1 id="lockTitle">Món quà chỉ dành cho <span>em</span></h1>
+        <p class="lock-copy">Nhập mật mã của hai đứa để mở món quà anh đã chuẩn bị nhé.</p>
+
+        <form id="passwordForm" autocomplete="off">
+          <label for="password">Mật mã yêu thương</label>
+          <div class="password-wrap">
+            <input id="password" type="password" placeholder="Nhập mật khẩu..." autocomplete="current-password" required />
+            <button class="toggle-password" id="togglePassword" type="button" aria-label="Hiện mật khẩu">👁</button>
+          </div>
+          <p class="error-message" id="errorMessage" role="alert"></p>
+          <button class="unlock-button" type="submit">
+            <span>Mở món quà</span>
+            <span aria-hidden="true">💗</span>
+          </button>
+        </form>
+        <p class="hint">Gợi ý: Một ngày thật đặc biệt của chúng mình ✨</p>
+      </div>
+    </section>
+
+    <main id="mainContent" aria-hidden="true">
+      <nav class="topbar">
+        <a class="brand" href="#home">For My Love <span>♥</span></a>
+        <button id="musicButton" class="music-button" type="button" aria-label="Bật nhạc">
+          <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span id="musicText">Bật nhạc</span>
+        </button>
+      </nav>
+
+      <section class="hero" id="home">
+        <div class="stars" aria-hidden="true"></div>
+        <div class="floating balloon b1">♡</div>
+        <div class="floating balloon b2">♡</div>
+        <div class="floating balloon b3">♡</div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">HÔM NAY LÀ NGÀY CỦA EM</p>
+          <h2>Happy Birthday,<br /><span id="loverName">Tình yêu của anh!</span></h2>
+          <p class="hero-message">Chúc cô gái anh yêu tuổi mới luôn rạng rỡ, bình an và hạnh phúc. Cảm ơn em vì đã xuất hiện và làm thế giới của anh trở nên thật đặc biệt.</p>
+          <a class="scroll-button" href="#memories">Khám phá món quà <span>↓</span></a>
+        </div>
+        <div class="cake-scene reveal" aria-label="Bánh sinh nhật">
+          <div class="cake-glow"></div>
+          <div class="cake">
+            <div class="candles">
+              <div class="candle"><i></i></div>
+              <div class="candle"><i></i></div>
+              <div class="candle"><i></i></div>
+            </div>
+            <div class="cake-top">♥ &nbsp; HAPPY &nbsp; ♥</div>
+            <div class="cake-base"><span>birthday</span></div>
+            <div class="cake-plate"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memories section" id="memories">
+        <div class="section-heading reveal">
+          <p class="eyebrow">NHỮNG MẢNH GHÉP HẠNH PHÚC</p>
+          <h2>Kỷ niệm của chúng mình</h2>
+          <p>Mỗi bức ảnh là một câu chuyện anh muốn cất giữ thật lâu.</p>
+        </div>
+        <div class="photo-grid" id="photoGrid"></div>
+      </section>
+
+      <section class="letter section">
+        <div class="letter-card reveal">
+          <span class="quote-mark">“</span>
+          <p class="eyebrow">GỬI ĐẾN EM</p>
+          <h2>Một lá thư nhỏ</h2>
+          <div class="letter-body" id="letterText">
+            <p>Em yêu à,</p>
+            <p>Thêm một tuổi mới, anh chỉ mong em luôn được sống thật vui, làm những điều em thích và mỉm cười thật nhiều. Dù những ngày phía trước có thế nào, anh vẫn muốn được ở bên, lắng nghe và cùng em đi qua tất cả.</p>
+            <p>Cảm ơn em đã là điều dịu dàng nhất trong cuộc sống của anh. Chúc mừng sinh nhật cô gái tuyệt vời của anh!</p>
+          </div>
+          <p class="signature">Yêu em thật nhiều ♡</p>
+        </div>
+      </section>
+
+      <section class="wishes section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">ĐIỀU ƯỚC TUỔI MỚI</p>
+          <h2>Anh chúc em...</h2>
+        </div>
+        <div class="wish-grid">
+          <article class="wish-card reveal"><span>☀️</span><h3>Luôn rạng rỡ</h3><p>Mỗi ngày đều bắt đầu bằng nụ cười và những điều thật đẹp.</p></article>
+          <article class="wish-card reveal"><span>🌷</span><h3>Luôn bình an</h3><p>Mọi dịu dàng của thế giới sẽ luôn tìm đến và ôm lấy em.</p></article>
+          <article class="wish-card reveal"><span>✨</span><h3>Luôn tỏa sáng</h3><p>Tự tin theo đuổi ước mơ và trở thành phiên bản em yêu nhất.</p></article>
+        </div>
+      </section>
+
+      <section class="finale section">
+        <div class="finale-card reveal">
+          <div class="heart-pulse">♥</div>
+          <p>Và điều cuối cùng...</p>
+          <h2>Anh yêu em!</h2>
+          <p class="finale-copy">Hôm nay, ngày mai và thật nhiều ngày sau nữa.</p>
+          <button id="celebrateButton" class="celebrate-button" type="button">Bấm để nhận bất ngờ 🎉</button>
+        </div>
+      </section>
+
+      <footer>Made with <span>♥</span> for the most special person</footer>
+    </main>
+
+    <dialog id="photoModal" class="photo-modal">
+      <button id="closeModal" aria-label="Đóng ảnh">×</button>
+      <img id="modalImage" alt="Kỷ niệm phóng lớn" />
+      <p id="modalCaption"></p>
+    </dialog>
+
+    <audio id="birthdayMusic" loop preload="none">
+      <source src="assets/birthday-music.mp3" type="audio/mpeg" />
+    </audio>
+    <script src="script.js"></script>
+  </body>
+</html>
